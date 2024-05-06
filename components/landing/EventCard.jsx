@@ -3,11 +3,11 @@ import ActionsButton from "../button/ActionsButton";
 import Link from "next/link";
 import Image from "next/image";
 
-const EventCard = ({item}) => {
+const EventCard = ({event}) => {
   return (
     <div className="overflow-hidden rounded-md bg-[#242526]">
       <Image
-        src={item.imageUrl}
+        src={event.imageUrl}
         alt="Event 1"
         className="w-full"
         width={500}
@@ -15,19 +15,19 @@ const EventCard = ({item}) => {
       />
 
       <div className="p-3">
-        <Link href={`/details/${item.id}`} className="font-bold text-lg">
-          {item.name}
+        <Link href={`/details/${event.id}`} className="font-bold text-lg">
+          {event.name}
         </Link>
         <p className="text-[#9C9C9C] text-sm mt-1">
-          {item.location}
+          {event.location}
         </p>
         <div className="text-[#737373] text-sm mt-1">
-          <span>{item?.interested_ids.length} Interested</span>
+          <span>{event?.interested_ids.length} Interested</span>
           <span> | </span>
-          <span>{item?.going_ids.length} Going</span>
+          <span>{event?.going_ids.length} Going</span>
         </div>
 
-        <ActionsButton />
+        <ActionsButton eventId={event?.id} interestedUserIds={event?.interestedUserIds} goingUserIds={event?.going_ids} />
       </div>
     </div>
   );

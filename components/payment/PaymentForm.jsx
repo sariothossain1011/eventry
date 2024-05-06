@@ -1,8 +1,17 @@
-import React from 'react'
+"use client"
+import { addGoingEvent } from '@/app/action'
+import { useAuth } from '@/app/hooks/useAuth'
 
-const PaymentForm = () => {
+
+const PaymentForm = ({eventId}) => {
+
+  const {auth } = useAuth();
+  const handlePayment =async()=>{
+    await addGoingEvent(eventId, auth);
+  }
+
   return (
-    <form>
+    <form action={handlePayment }>
     <div className="my-4 space-y-2">
       <label htmlFor="name" className="block">
         Name
@@ -15,7 +24,7 @@ const PaymentForm = () => {
     </div>
 
     <div className="my-4 space-y-2">
-      <label for="email" className="block">
+      <label htmlFor="email" className="block">
         Email
       </label>
       <input
@@ -26,7 +35,7 @@ const PaymentForm = () => {
     </div>
 
     <div className="my-4 space-y-2">
-      <label for="card" className="block">
+      <label htmlFor="card" className="block">
         Card Number
       </label>
       <input
@@ -37,7 +46,7 @@ const PaymentForm = () => {
     </div>
 
     <div className="my-4 space-y-2">
-      <label for="expiry" className="block">
+      <label htmlFor="expiry" className="block">
         Expiry Date
       </label>
       <input
@@ -48,7 +57,7 @@ const PaymentForm = () => {
     </div>
 
     <div className="my-4 space-y-2">
-      <label for="cvv" className="block">
+      <label htmlFor="cvv" className="block">
         CVV
       </label>
       <input

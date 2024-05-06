@@ -8,7 +8,7 @@ const EventList =async() => {
   return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
       {
-        allEvents.map((item)=> <EventCard item={item} key={item.id}/>)
+        allEvents.map((event)=> <EventCard event={event} key={event.id}/>)
       }
     </div>
   )
