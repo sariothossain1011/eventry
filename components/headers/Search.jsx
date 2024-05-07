@@ -1,4 +1,5 @@
 "use client"
+import useDebounce from "@/app/hooks/useDebounce";
 import { usePathname, useSearchParams,useRouter } from "next/navigation";
 
 
@@ -7,16 +8,16 @@ const Search = () => {
     const pathName = usePathname()
     const {replace} = useRouter()
 
-    const doSearch =(term)=>{
-        const params =new URLSearchParams(serachParams);
-       
-        if(term){
-            params.set("qurey",term);
-        }else{
-            params.delete("qurey");
-        }
-        replace(`${pathName}?${params.toString()}`)
-    }
+    const doSearch = useDebounce((term)=>{
+      const params =new URLSearchParams(serachParams);
+     
+      if(term){
+          params.set("qurey",term);
+      }else{
+          params.delete("qurey");
+      }
+      replace(`${pathName}?${params.toString()}`)
+  },500)
 function handleSearch(term){
     doSearch(term)
 }
