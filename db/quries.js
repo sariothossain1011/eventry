@@ -6,10 +6,28 @@ import {
 } from "@/utils/data-utils";
 import mongoose from "mongoose";
 
-export const getAllEvents = async () => {
-  const allEvents = await EventModel.find().lean();
+// export const getAllEvents = async (query) => {
+//   console.log(query,"..........")
+//   let allEvents = [];
+//   if(query){
+//     const regex = new RegExp(query,"i");
+//     allEvents = await EventModel.find({name:{$regex:regex}}).lean();
+
+//   }else{
+//     allEvents = await EventModel.find().lean();
+//   }
+//   return ReplaceMongoIdInArray(allEvents);
+// };
+export async function getAllEvents(query) {
+  let allEvents = [];
+  if (query) {
+      const regex = new RegExp(query, "i");
+      allEvents = await EventModel.find({ name: { $regex: regex } }).lean();
+  } else {
+      allEvents = await EventModel.find().lean();
+  }
   return ReplaceMongoIdInArray(allEvents);
-};
+}
 
 export const getEvent = async (id) => {
   const event = await EventModel.findById(id).lean();

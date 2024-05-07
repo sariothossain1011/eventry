@@ -1,12 +1,15 @@
 import SearchHeader from '@/components/headers/SearchHeader'
 import EventList from '@/components/landing/EventList'
-import React from 'react'
+import Loading from '@/components/loading/Loding'
+import React, { Suspense } from 'react'
 
-const Home = () => {
+const Home = ({searchParams: {query}}) => {
   return (
     <section className='container'>
     <SearchHeader/>
-    <EventList/>
+    <Suspense key={query} fallback={<Loading/>}>
+    <EventList query={query}/>
+    </Suspense>
     </section>
     
   )
